@@ -136,6 +136,42 @@ void mergeSort(std::vector<int>& arr, int start, int end) {
     merge(arr, start, end, mid);
 }
 
+int partition(std::vector<int> &arr, int low, int high) {
+  // Escojer el pivote que en este caso es el ultimo.
+  int pivot = arr[high];
+
+  // Indice que indica la posición en la que se encontrara el pivote.
+  int index = low - 1;
+
+  for (int i = low; i <= high - 1; i++) {
+    if (arr[i] < pivot) {
+      index++;
+
+      swap(arr, i, index);
+    }
+  }
+  swap(arr, index + 1, high);
+
+  return index + 1;
+}
+
+/*
+Descripción: Ordena los elementos de un vector de forma ascendente usando el
+metodo de quicksort. Entrada: Un vector de tipo entero con todos los valores.
+Salida: No retornará nada.
+Complejidad en el tiempo: O(n*logn)
+Complejidad en el espacio: O(logn)
+*/
+void quickSort(std::vector<int> &arr, int start, int end) {
+  
+  if (start < end) {
+    int ptn = partition(arr, start, end);
+
+    quickSort(arr, start, ptn - 1);
+    quickSort(arr, ptn + 1, end);
+  }
+}
+
 // ------------------ Algoritmos de Busqueda ------------------
 
 /*
@@ -312,6 +348,45 @@ int main() {
     displayVector(arr4);
     std::cout << "Arreglo Ordenado: " << std::endl;
     mergeSort(arr4, 0, arr4.size() - 1);
+    displayVector(arr4);
+    std::cout << std::endl;
+
+    std::cout << "------------ Quick Sort ------------" << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Caso 1: " << std::endl;
+    std::cout << "Arreglo Desordenado: " << std::endl;
+    shuffle(arr1);
+    displayVector(arr1);
+    std::cout << "Arreglo Ordenado: " << std::endl;
+    quickSort(arr1, 0, arr1.size() - 1);
+    displayVector(arr1);
+    std::cout << std::endl;
+
+    std::cout << "Caso 2: " << std::endl;
+    std::cout << "Arreglo Desordenado: " << std::endl;
+    shuffle(arr2);
+    displayVector(arr2);
+    std::cout << "Arreglo Ordenado: " << std::endl;
+    quickSort(arr2, 0, arr2.size() - 1);
+    displayVector(arr2);
+    std::cout << std::endl;
+
+    std::cout << "Caso 3: " << std::endl;
+    std::cout << "Arreglo Desordenado: " << std::endl;
+    shuffle(arr3);
+    displayVector(arr3);
+    std::cout << "Arreglo Ordenado: " << std::endl;
+    quickSort(arr3, 0, arr3.size() - 1);
+    displayVector(arr3);
+    std::cout << std::endl;
+
+    std::cout << "Caso 4: " << std::endl;
+    std::cout << "Arreglo Desordenado: " << std::endl;
+    shuffle(arr4);
+    displayVector(arr4);
+    std::cout << "Arreglo Ordenado: " << std::endl;
+    quickSort(arr4, 0, arr4.size() - 1);
     displayVector(arr4);
     std::cout << std::endl;
 
